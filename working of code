@@ -1,0 +1,112 @@
+✅ Explanation of the Java Code
+1. Import statements
+import java.util.Random;
+import java.util.Scanner;
+
+
+Scanner → lets you take input from the user.
+
+Random → generates the secret random number.
+
+These two are essential for the game.
+
+2. Variable setup + main structure
+Scanner sc = new Scanner(System.in);
+Random rand = new Random();
+
+int totalScore = 0;
+boolean playAgain = true;
+
+
+totalScore → adds points for each round.
+
+playAgain → controls whether the game continues.
+
+3. Game loop (this allows multiple rounds)
+while (playAgain) {
+
+
+As long as playAgain is true, it keeps starting new rounds of the game.
+
+4. Generate the random number
+int number = rand.nextInt(100) + 1;
+
+
+rand.nextInt(100) gives a number from 0–99
+
+Adding +1 makes it 1–100
+This is the user’s secret number to guess.
+
+5. Attempts setup
+int attempts = 0;
+int maxAttempts = 7;
+
+
+You track how many attempts the user used.
+
+maxAttempts is the limit.
+
+6. The guessing loop
+while (attempts < maxAttempts) {
+
+
+This loop keeps asking the user for guesses until they either guess correctly or run out of chances.
+
+7. Take user's guess
+System.out.print("Enter your guess: ");
+int guess = sc.nextInt();
+attempts++;
+
+
+User enters a number
+
+You increment attempts each time
+
+8. Check the guess
+if (guess == number) {
+    System.out.println("Correct! You guessed it in " + attempts + " attempts.");
+    totalScore += (maxAttempts - attempts + 1);
+    break;
+}
+else if (guess > number) {
+    System.out.println("Too high!");
+}
+else {
+    System.out.println("Too low!");
+}
+
+
+Here's what happens:
+
+If user guesses right → break the loop
+
+If guess is too high → tell them
+
+If guess is too low → tell them
+
+Score calculation is based on how fast they guessed
+
+9. If they fail all attempts
+if (attempts == maxAttempts) {
+    System.out.println("Out of attempts! The correct number was: " + number);
+}
+
+
+If they used all attempts and still didn’t guess correctly, reveal the number.
+
+10. Ask if they want to play again
+System.out.print("Play again? (yes/no): ");
+String option = sc.next().toLowerCase();
+playAgain = option.equals("yes");
+
+
+If user types "yes" → next round
+
+If not → game ends
+
+11. Final score + exit
+System.out.println("Your total score: " + totalScore);
+System.out.println("Thanks for playing!");
+
+
+Once they stop playing, you show the final score and end the program.
